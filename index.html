@@ -1,0 +1,32 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset='UTF-8' />
+    <title>HTML Font Atlas Generator</title>
+    <style>
+      body {margin: 0; padding: 0; overflow: hidden;}
+    </style>
+  </head>
+  <body>
+    <canvas id="myCanvas" width="512" height="512">
+    <script src='makeTextureAtlas.js'></script>
+    <script>
+
+      var c = document.getElementById("myCanvas");
+      var strList = [];
+      for(var i=32; i<128; i++) {
+        strList.push(String.fromCharCode(i));
+      }
+
+      var fontSize = 64;
+      var fontFamily = "'Lucida Console', Monaco, monospace";
+      var drawBound = false;
+      var mapping = makeTextureAtlasFromLabels(c, strList, fontSize, fontFamily, drawBound);
+
+      var img = c.toDataURL("image/png");
+      document.write('<img src="'+img+'"/>');
+      console.log(JSON.stringify(mapping, null, '\t'));
+
+    </script>
+  </body>
+</html>
